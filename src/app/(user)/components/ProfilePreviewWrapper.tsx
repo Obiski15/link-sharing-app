@@ -1,10 +1,11 @@
+"use client";
+
 import { useLinks } from "../useLinks";
 import { useUser } from "../useUser";
 
 import ProfilePreview from "@/components/ProfilePreview";
 
 function ProfilePreviewWrapper() {
-  "use client";
   const {
     data: links = {},
     isLoading: isLoadingLinks,
