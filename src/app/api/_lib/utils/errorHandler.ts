@@ -74,17 +74,17 @@ function handleProductionError(err: any) {
 
 export function errorHandler(err: any, request: NextRequest) {
   if (process.env.NODE_ENV === "production") {
-    let error: any = { ...err };
+    let error: any = { ...err, name: err.name, message: err.message };
 
-    if (err.name === "CastError") error = handleCastError();
+    if (error.name === "CastError") error = handleCastError();
 
-    if (err.name === "JsonWebTokenError") error = handleJsonWebTokenError();
+    if (error.name === "JsonWebTokenError") error = handleJsonWebTokenError();
 
-    if (err.name === "TokenExpiredError") error = handleTokenExpiredError();
+    if (error.name === "TokenExpiredError") error = handleTokenExpiredError();
 
-    if (err.name === "ValidationError") error = handleValidationError(err);
+    if (error.name === "ValidationError") error = handleValidationError(err);
 
-    if (err.code === 11000) error = handleDuplicateField(request);
+    if (error.code === 11000) error = handleDuplicateField(request);
 
     return handleProductionError(error);
   }

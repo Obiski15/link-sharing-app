@@ -1,10 +1,10 @@
 "use client";
 
 import { toast } from "@/components/hooks/use-toast";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import Link from "next/link";
 
 import { useLogin } from "../useLogin";
@@ -26,7 +26,7 @@ function Login() {
   } = useForm<LoginInputs>();
 
   async function onSubmit(data: LoginInputs) {
-    await loginUser(data, {
+    loginUser(data, {
       onError: (error) => {
         toast({
           title: "An Error Occurred",
@@ -42,9 +42,9 @@ function Login() {
           variant: "success",
           duration: 3000,
         });
+        router.replace("/links");
       },
     });
-    router.replace("/links");
   }
 
   return (

@@ -4,7 +4,7 @@ import { LoginInputs } from "./types";
 
 export function useLogin() {
   const {
-    mutateAsync: loginUser,
+    mutate: loginUser,
     isPending: isLoading,
     error,
   } = useMutation({

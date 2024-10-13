@@ -4,7 +4,7 @@ import { SignUpInputs } from "./types";
 
 export function useSignUp() {
   const {
-    mutateAsync: signupUser,
+    mutate: signupUser,
     isPending: isLoading,
     error,
   } = useMutation({
