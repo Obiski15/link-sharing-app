@@ -36,7 +36,7 @@ function FormInput({
         </label>
 
         <div
-          className={`flex justify-between items-center gap-3 w-full border-[1px] rounded-lg py-3 px-4 min-h-[48px] ${
+          className={`overflow-clip flex justify-between items-center gap-3 w-full border-[1px] rounded-lg py-3 px-4 min-h-[48px] ${
             isActive === name && !error
               ? "border-border-active shadow-[0px_0px_32px_0px_#633CFF40]"
               : error
@@ -44,7 +44,12 @@ function FormInput({
               : "border-border"
           }`}
         >
-          <Icon strokeWidth={2.25} className="text-secondary-foreground" />
+          <Icon
+            strokeWidth={2.25}
+            width={12}
+            height={12}
+            className="min-w-3 min-h-3 text-secondary-foreground"
+          />
           <input
             id={id}
             className="focus:outline-none flex-1"
@@ -56,7 +61,7 @@ function FormInput({
             {...register}
           />
           {error && (
-            <p className="font-normal text-right right-2 text-error text-sm leading-3">
+            <p className="hidden sm:inline-block font-normal text-right right-2 text-error text-sm leading-3">
               {error}
             </p>
           )}

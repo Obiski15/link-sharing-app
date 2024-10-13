@@ -88,6 +88,6 @@
   input,
   button,
   textarea {
-    @apply disabled:cursor-not-allowed disabled:opacity-[45%] bg-none active:outline-none focus:outline-none;
+    @apply disabled:cursor-not-allowed disabled:opacity-[45%] bg-none bg-transparent active:outline-none focus:outline-none;
   }
 }
