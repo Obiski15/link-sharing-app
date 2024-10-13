@@ -52,7 +52,7 @@ function ProfilePreview({ user, links, isLoading, error }: Props) {
             <p className="rounded-full bg-border w-full h-full"></p>
           ) : user?.image ? (
             <Image
-              src={`${process.cwd()}${user?.image}`}
+              src={user?.image}
               alt="user-profile"
               fill={true}
               className="rounded-full border-4 border-border-active object-cover"

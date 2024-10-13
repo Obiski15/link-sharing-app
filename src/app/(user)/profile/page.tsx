@@ -47,7 +47,7 @@ function Profile() {
     }
 
     if (user?.user?.image) {
-      setImagePath(`${process.cwd()}${user?.user?.image}`);
+      setImagePath(user?.user?.image);
     }
   }, [error, user]);
 

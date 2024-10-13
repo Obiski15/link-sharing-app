@@ -1,10 +1,14 @@
-import { mkdir, stat, writeFile } from "fs/promises";
-import { join } from "path";
+import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import sharp from "sharp";
-import mime from "mime";
 
 import { ImageFile, ImageMimeTypes } from "../../types";
 import { AppError } from "@/app/api/_lib/AppError";
+
+cloudinary.config({
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+});
 
 export async function uploadImage(image: ImageFile) {
   if (!Object.values(ImageMimeTypes).includes(image.type))
@@ -12,40 +16,28 @@ export async function uploadImage(image: ImageFile) {
 
   const buffer = Buffer.from(await image.arrayBuffer());
 
-  const relativeDir = `/uploads/images/user/${new Date()
-    .toLocaleDateString("en-NG", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
-    .replaceAll("/", "-")}`;
-
-  const uploadDir = join(process.cwd(), relativeDir);
-
-  try {
-    await stat(uploadDir);
-  } catch (err: any) {
-    if (err.code === "ENOENT") {
-      await mkdir(uploadDir, { recursive: true });
-    } else {
-      throw new Error("Something went wrong");
-    }
-  }
-
-  const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-  const filename = `${image.name
-    .replace(/\.[^/.]+$/, "")
-    .replace(
-      " ",
-      "-"
-    )}-${uniqueSuffix}-${crypto.randomUUID()}.${mime.getExtension(image.type)}`;
-
   const optimisedImage = await sharp(buffer)
     .jpeg({ quality: 80 })
     .resize(800)
     .toBuffer();
 
-  await writeFile(`${uploadDir}/${filename}`, optimisedImage);
+  const uploadResult: UploadApiResponse = await new Promise(
+    (resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            folder: "/link-sharing-app/user",
+            use_filename: true,
+          },
+          (error, uploadResult) => {
+            if (error) return reject(new AppError("Image Upload Failed", 500));
 
-  return `${relativeDir}/${filename}`;
+            return resolve(uploadResult as UploadApiResponse);
+          }
+        )
+        .end(optimisedImage);
+    }
+  );
+
+  return uploadResult.secure_url;
 }
