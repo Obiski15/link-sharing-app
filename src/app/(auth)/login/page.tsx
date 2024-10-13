@@ -95,6 +95,10 @@ function Login() {
           register={{
             ...register("password", {
               required: "Enter your password",
+              minLength: {
+                value: 8,
+                message: "Minimum Password length is 8",
+              },
               onBlur: () => setIsActive(""),
             }),
           }}
