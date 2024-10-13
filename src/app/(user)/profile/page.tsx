@@ -98,7 +98,7 @@ function Profile() {
                 Profile picture
               </p>
 
-              <div className="col-span-3 sm:col-span-2 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-6 border-border">
+              <div className="col-span-3 sm:col-span-2 flex flex-col sm:flex-row justify-start items-start sm:items-center gap-6">
                 <div
                   style={{ backgroundImage: `url(${imagePath})` }}
                   id="upload-image-background"
@@ -149,7 +149,7 @@ function Profile() {
             }}
             className="flex flex-col justify-between items-start p-5 rounded-xl bg-secondary gap-3 w-full"
           >
-            <div className="w-full flex justify-between items-center gap-4">
+            <div className="w-full flex justify-between flex-col min-[500px]:flex-row items-start min-[500px]:items-center gap-4">
               <label
                 htmlFor="first-name"
                 className={`text-secondary-foreground font-normal text-md leading-2 relative after:content-['*'] after:absolute after:top-[-5px] after:right-[-10px] after:font-bold ${
@@ -179,7 +179,7 @@ function Profile() {
               />
             </div>
 
-            <div className="w-full flex justify-between items-center gap-4">
+            <div className="w-full flex flex-col min-[500px]:flex-row items-start min-[500px]:items-center justify-between gap-4">
               <label
                 htmlFor="last-name"
                 className={`text-secondary-foreground font-normal text-md leading-2 relative after:content-['*'] after:absolute after:top-[-5px] after:right-[-10px] after:font-bold ${
@@ -209,7 +209,7 @@ function Profile() {
               />
             </div>
 
-            <div className="w-full flex justify-between items-center gap-4">
+            <div className="w-full flex justify-between flex-col min-[500px]:flex-row items-start min-[500px]:items-center gap-4">
               <label
                 htmlFor="email"
                 className="text-secondary-foreground font-normal text-md leading-2"

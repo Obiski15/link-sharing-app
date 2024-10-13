@@ -14,7 +14,7 @@ function Header({
   const router = useRouter();
 
   return (
-    <header className="sm:bg-primary-foreground sm:rounded-b-[32px] h-auto sm:h-[357px]">
+    <header className="w-full sm:bg-primary-foreground sm:rounded-b-[32px] h-auto sm:h-[357px]">
       <div className="p-6">
         {isLoggedIn ? (
           <div className="flex justify-between items-center py-4 pr-4 pl-6 gap-2 sm:bg-primary rounded-xl">

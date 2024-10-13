@@ -10,7 +10,7 @@ function Loading() {
           width={100}
           height={100}
         />
-        <p className="text-6xl text-secondary-foreground tracking-wide font-bold">
+        <p className="mdtext-4xl text-2xl text-secondary-foreground tracking-wide font-bold">
           Getting things ready
         </p>
         <p className="font-medium text-md text-secondary-foreground tracking-wide">
