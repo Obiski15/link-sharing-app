@@ -7,7 +7,7 @@ export async function getUser() {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result.data;
 }
@@ -33,7 +33,7 @@ export async function updateUser(data: {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result.data;
 }
@@ -43,7 +43,7 @@ export async function getUserPreview(id: string) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }

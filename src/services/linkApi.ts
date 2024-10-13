@@ -4,11 +4,12 @@ export async function getLinks() {
   const res = await fetch(`${BASE_URL}`, {
     credentials: "include",
   });
-  const data = await res.json();
 
-  if (!res.ok) throw new Error(data.message);
+  const result = await res.json();
 
-  return data;
+  if (!res.ok) throw result;
+
+  return result;
 }
 
 export async function deleteLink(id: string) {
@@ -22,7 +23,8 @@ export async function deleteLink(id: string) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
+
   return null;
 }
 
@@ -38,7 +40,7 @@ export async function addLink(data: object) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }
@@ -55,7 +57,7 @@ export async function updateLink(data: object) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }
@@ -65,6 +67,7 @@ export async function getPreview(id: string) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
+
   return result;
 }

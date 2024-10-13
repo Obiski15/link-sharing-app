@@ -13,7 +13,7 @@ export async function signup(data: SignUpInputs) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }
@@ -29,7 +29,7 @@ export async function login(data: LoginInputs) {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }
@@ -41,7 +41,7 @@ export async function logout() {
 
   const result = await res.json();
 
-  if (!res.ok) throw new Error(result.message);
+  if (!res.ok) throw result;
 
   return result;
 }
