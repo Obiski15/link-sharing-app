@@ -72,7 +72,11 @@ function Profile() {
     )
       return;
     updateData(
-      { firstName: data.firstName, lastName: data.lastName, image },
+      {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        image: image || user?.user?.image,
+      },
       {
         onSuccess: () => {
           setDisplayUpdateMessage(true);

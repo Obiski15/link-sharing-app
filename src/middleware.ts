@@ -25,9 +25,7 @@ async function middleware(request: NextRequest) {
         }
       );
       if (!res.ok) {
-        const excludedStatus = [400, 401, 403];
-
-        if (!excludedStatus.includes(res.status))
+        if (!res.status.toString().startsWith("4"))
           return NextResponse.redirect(new URL("/error", request.url));
         throw new Error();
       }

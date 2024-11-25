@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/components/hooks/use-toast";
 import { logout } from "@/services/authApi";
+import { useRouter } from "next/navigation";
 
 export function useLogout() {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { mutateAsync: logoutUser, isPending: isLoggingOut } = useMutation({
     mutationKey: ["user"],
@@ -16,6 +18,7 @@ export function useLogout() {
         duration: 2000,
       });
       queryClient.clear();
+      router.push("/login");
     },
 
     onError: (error) => {

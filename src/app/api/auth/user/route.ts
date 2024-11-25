@@ -16,8 +16,6 @@ export const GET = catchAsync(async (request: NextRequest) => {
   // Verify JWT
   const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
 
-  if (!payload) throw new AppError("Invalid Token", 403);
-
   const user = await User.findOne({ _id: payload.id });
 
   if (!user) throw new AppError("User not found", 404);
@@ -42,8 +40,6 @@ export const PATCH = catchAsync(async (request: NextRequest) => {
 
   // Verify JWT
   const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
-
-  if (!payload) throw new AppError("Invalid Token", 403);
 
   if (image) {
     imageUrl = await uploadImage(image);

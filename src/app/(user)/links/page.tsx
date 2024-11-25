@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useUpdateLink } from "../useUpdateLink";
 import { useDeleteLink } from "../useDeleteLink";
 import { useAddLink } from "../useAddLink";
+import { icons } from "@/lib/constants";
 import { useLinks } from "../useLinks";
 
 import FormInput from "@/components/FormInput";
@@ -201,9 +202,9 @@ export default function Links() {
                           message: "kindly provide a valid url",
                         },
                         pattern: {
-                          value: new RegExp(
-                            `^(https:\/\/)(www\.)${watchedForm[index]?.platform}\.com\/([a-zA-Z0-9-_\.\/\?\=\&]+)$`
-                          ),
+                          value: icons.find(
+                            (icon) => icon.name === watchedForm[index]?.platform
+                          )?.pattern!,
                           message: "Invalid profile URL",
                         },
 

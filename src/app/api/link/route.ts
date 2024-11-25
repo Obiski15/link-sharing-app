@@ -14,8 +14,6 @@ export const GET = catchAsync(async (request: NextRequest) => {
   // Verify JWT
   const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
 
-  if (!payload) throw new AppError("Invalid Token", 403);
-
   const links = await Link.find({ userId: payload.id }).select("-__v");
 
   return NextResponse.json(
@@ -37,8 +35,6 @@ export const POST = catchAsync(async (request: NextRequest) => {
   // Verify JWT
   const payload = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
 
-  if (!payload) throw new AppError("Invalid Token", 403);
-
   const updatedData = { ...data, userId: payload.id };
 
   await Link.create(updatedData);
@@ -52,8 +48,7 @@ export const DELETE = catchAsync(async (request: NextRequest) => {
   if (!token) throw new AppError("Unauthorized", 401);
 
   // Verify JWT
-  const payload = jwt.verify(token, process.env.JWT_SECRET!);
-  if (!payload) throw new AppError("Invalid Token", 403);
+  jwt.verify(token, process.env.JWT_SECRET!);
 
   const { id } = await request.json();
 
@@ -72,11 +67,9 @@ export const PUT = catchAsync(async (request: NextRequest) => {
   if (!token) throw new AppError("Unauthorized", 401);
 
   // Verify JWT
-  const payload = jwt.verify(token, process.env.JWT_SECRET!);
+  jwt.verify(token, process.env.JWT_SECRET!);
 
-  if (!payload) throw new AppError("Invalid Token", 403);
-
-  const newData = await Link.findByIdAndUpdate(
+  const updatedLink = await Link.findByIdAndUpdate(
     data._id,
     { ...data },
     {
@@ -85,12 +78,12 @@ export const PUT = catchAsync(async (request: NextRequest) => {
     }
   );
 
-  if (!newData) throw new Error("Link not found");
+  if (!updatedLink) throw new Error("Link not found");
 
   return NextResponse.json(
     {
       status: "success",
-      data: { link: newData },
+      data: { link: updatedLink },
     },
     { status: 200 }
   );

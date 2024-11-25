@@ -14,7 +14,7 @@ function Logo({ iconOnly }: Props) {
   return (
     <div
       className="flex justify-between items-center gap-3 cursor-default"
-      onClick={() => router.push("/user/links")}
+      onClick={() => router.push("/links")}
     >
       <Image src="/images/logo.png" alt="logo" width={33} height={33} />
       <div className={`${iconOnly ? "hidden sm:block" : "block"}`}>

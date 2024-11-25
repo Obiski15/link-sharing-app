@@ -16,6 +16,8 @@ async function dbConnect() {
       { dbName: "link-sharing-app" }
     );
     connection.isConnected = db.connections[0].readyState;
+
+    console.log("connection successfull");
   } catch (error: any) {
     throw new Error(error);
   }
